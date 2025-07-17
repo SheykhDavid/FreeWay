@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { type FC } from 'react'
-import { UserProp } from "@freeway/modules/users";
+import { UserProp } from "@marzneshin/modules/users";
 import { useTranslation } from "react-i18next";
 
 export const UserExpirationValue: FC<UserProp> = ({ user }) => {

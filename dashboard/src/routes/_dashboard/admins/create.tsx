@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { AdminsMutationDialog } from "@freeway/modules/admins";
+import { AdminsMutationDialog } from "@marzneshin/modules/admins";
 
 const AdminCreate = () => {
     const navigate = useNavigate({ from: "/admins/create" });

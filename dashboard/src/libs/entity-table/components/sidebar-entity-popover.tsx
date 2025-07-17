@@ -3,10 +3,10 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import {
     SidebarEntitySelection
-} from "@freeway/libs/entity-table/components";
+} from "@marzneshin/libs/entity-table/components";
 import { FC } from "react";
 
 interface SidebarEntityTablePopoverProps {

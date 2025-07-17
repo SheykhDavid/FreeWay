@@ -1,15 +1,15 @@
 import {
     HostType,
     fetchHosts
-} from '@freeway/modules/hosts';
+} from '@marzneshin/modules/hosts';
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from 'react';
 import {
     useInboundsQuery,
-} from '@freeway/modules/inbounds';
-import { SidebarEntityTable } from '@freeway/libs/entity-table';
+} from '@marzneshin/modules/inbounds';
+import { SidebarEntityTable } from '@marzneshin/libs/entity-table';
 import { columns } from './columns';
-import { useDialog } from '@freeway/common/hooks';
+import { useDialog } from '@marzneshin/common/hooks';
 import {
     InboundNotSelectedAlertDialog
 } from './inbound-not-selected-alert-dialog';

@@ -5,7 +5,7 @@ import {
   CardHeader,
   ScrollArea,
   Separator,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import type { NodeType } from "..";
 import { useNodesLog } from "..";
 import type { FC } from "react";

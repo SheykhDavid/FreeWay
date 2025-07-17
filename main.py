@@ -1,5 +1,5 @@
 import asyncio
-from app.freeway import main
+from app.marzneshin import main
 
 
 if __name__ == "__main__":

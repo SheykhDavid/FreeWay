@@ -6,7 +6,7 @@ import {
 } from "../../sections";
 import {
     Accordion,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 
 export const ShadowTlsProfileFields = () => {
     return (

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@freeway/common/utils";
-import { AdminType } from "@freeway/modules/admins";
+import { fetch } from "@marzneshin/common/utils";
+import { AdminType } from "@marzneshin/modules/admins";
 import {
     FetchEntityReturn,
     UseEntityQueryProps,
     EntityQueryKeyType
-} from "@freeway/libs/entity-table";
+} from "@marzneshin/libs/entity-table";
 
 export async function fetchAdmins({ queryKey }: EntityQueryKeyType): FetchEntityReturn<AdminType> {
     const pagination = queryKey[1];

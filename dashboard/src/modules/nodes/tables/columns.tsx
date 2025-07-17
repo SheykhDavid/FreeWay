@@ -1,16 +1,16 @@
 import { ColumnDef } from "@tanstack/react-table"
-import { NodesStatusBadge, NodeType, NodesStatus } from "@freeway/modules/nodes"
+import { NodesStatusBadge, NodeType, NodesStatus } from "@marzneshin/modules/nodes"
 import {
     DataTableActionsCell,
     DataTableColumnHeader
-} from "@freeway/libs/entity-table"
-import i18n from "@freeway/features/i18n"
+} from "@marzneshin/libs/entity-table"
+import i18n from "@marzneshin/features/i18n"
 import {
     type ColumnActions
-} from "@freeway/libs/entity-table";
+} from "@marzneshin/libs/entity-table";
 import {
     NoPropogationButton,
-} from "@freeway/common/components"
+} from "@marzneshin/common/components"
 
 export const columns = (actions: ColumnActions<NodeType>): ColumnDef<NodeType>[] => ([
     {

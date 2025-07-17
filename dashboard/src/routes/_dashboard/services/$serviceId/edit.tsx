@@ -5,7 +5,7 @@ import {
 import {
     MutationDialog,
     useRouterServiceContext,
-} from "@freeway/modules/services";
+} from "@marzneshin/modules/services";
 
 const ServiceEdit = () => {
     const value = useRouterServiceContext()

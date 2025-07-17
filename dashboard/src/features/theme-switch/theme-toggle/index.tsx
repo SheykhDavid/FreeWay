@@ -5,10 +5,10 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuItem,
     DropdownMenuPortal,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useTheme, Theme } from "../theme-provider";
 import { useTranslation } from "react-i18next";
-import { cn } from "@freeway/common/utils";
+import { cn } from "@marzneshin/common/utils";
 
 const ThemeItem = ({ schema }: { schema: Theme }) => {
     const { theme, setTheme } = useTheme();

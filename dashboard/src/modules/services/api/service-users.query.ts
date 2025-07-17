@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@freeway/common/utils";
-import { UserType } from "@freeway/modules/users";
+import { fetch } from "@marzneshin/common/utils";
+import { UserType } from "@marzneshin/modules/users";
 import type {
     DoubleEntityQueryKeyType,
     UseEntityQueryProps,
     FetchEntityReturn
-} from "@freeway/libs/entity-table";
+} from "@marzneshin/libs/entity-table";
 
 interface UseServiceUsersQueryProps extends UseEntityQueryProps {
     serviceId: number;

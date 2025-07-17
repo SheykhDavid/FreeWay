@@ -12,8 +12,8 @@ import {
     Accordion,
     ClearableTextField,
     HStack,
-} from "@freeway/common/components";
-import { SettingSection } from "@freeway/modules/hosts";
+} from "@marzneshin/common/components";
+import { SettingSection } from "@marzneshin/modules/hosts";
 import { useTranslation } from "react-i18next";
 
 export const GeneralProfileFields = () => {

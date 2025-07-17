@@ -1,9 +1,9 @@
 import {
     MiniWidget
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import {
     CertificateButton
-} from "@freeway/modules/settings";
+} from "@marzneshin/modules/settings";
 import { useTranslation } from "react-i18next";
 
 export const CertificateWidget = () => {

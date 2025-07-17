@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@freeway/common/utils";
-import { UserType } from "@freeway/modules/users";
+import { fetch } from "@marzneshin/common/utils";
+import { UserType } from "@marzneshin/modules/users";
 import {
     FetchEntityReturn,
     UseEntityQueryProps,
     EntityQueryKeyType
-} from "@freeway/libs/entity-table";
+} from "@marzneshin/libs/entity-table";
 
 export type SortUserBy = "username" | "used_traffic" | "data_limit" | "expire_date" | "created_at"
 

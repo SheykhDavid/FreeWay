@@ -1,4 +1,4 @@
-import { Skeleton } from "@freeway/common/components";
+import { Skeleton } from "@marzneshin/common/components";
 
 export const SettingsInfoSkeleton = () => {
     return (

@@ -9,10 +9,10 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { alpnOptions } from "@freeway/modules/hosts";
+import { alpnOptions } from "@marzneshin/modules/hosts";
 
 export const AlpnField = () => {
     const { t } = useTranslation();

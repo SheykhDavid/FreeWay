@@ -11,7 +11,7 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@freeway/components",
-    "utils": "@freeway/utils"
+    "components": "@marzneshin/components",
+    "utils": "@marzneshin/utils"
   }
 }

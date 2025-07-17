@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createHashHistory, createRouter } from '@tanstack/react-router'
-import '@freeway/features/i18n'
+import '@marzneshin/features/i18n'
 import './globals.css'
 
 import { routeTree } from './routeTree.gen'

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Badge, BadgeVariantKeys } from "@freeway/common/components";
+import { Badge, BadgeVariantKeys } from "@marzneshin/common/components";
 
 interface BooleanPillProps {
     active: boolean;

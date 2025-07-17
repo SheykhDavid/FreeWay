@@ -1,5 +1,5 @@
 
-import { SectionWidget } from "@freeway/common/components";
+import { SectionWidget } from "@marzneshin/common/components";
 
 export const ConfigurationWidget = () => {
     return (

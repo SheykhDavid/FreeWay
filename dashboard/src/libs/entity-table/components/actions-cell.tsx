@@ -11,7 +11,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@freeway/common/components"
+} from "@marzneshin/common/components"
 import { MoreHorizontal, PencilIcon, TrashIcon } from "lucide-react"
 import { useTranslation } from "react-i18next"
 

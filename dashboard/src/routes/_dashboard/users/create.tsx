@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { UsersMutationDialog } from "@freeway/modules/users";
+import { UsersMutationDialog } from "@marzneshin/modules/users";
 
 const UserCreate = () => {
     const navigate = useNavigate({ from: "/users/create" });

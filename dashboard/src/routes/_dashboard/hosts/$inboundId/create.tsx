@@ -5,9 +5,9 @@ import {
     Await,
     useNavigate,
 } from "@tanstack/react-router";
-import { HostsMutationDialog } from "@freeway/modules/hosts";
-import { fetchInbound } from "@freeway/modules/inbounds";
-import { Loading, AlertDialog, AlertDialogContent } from "@freeway/common/components";
+import { HostsMutationDialog } from "@marzneshin/modules/hosts";
+import { fetchInbound } from "@marzneshin/modules/inbounds";
+import { Loading, AlertDialog, AlertDialogContent } from "@marzneshin/common/components";
 
 const HostCreate = () => {
     const { inboundId } = Route.useParams();

@@ -7,14 +7,14 @@ import {
 import {
     RouterHostContext,
     fetchHost,
-} from "@freeway/modules/hosts";
+} from "@marzneshin/modules/hosts";
 import { Suspense } from "react";
 import {
     AlertDialog,
     AlertDialogContent,
     AlertDialogTitle,
     Loading
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 
 const HostProvider = () => {
     const { host } = Route.useLoaderData()

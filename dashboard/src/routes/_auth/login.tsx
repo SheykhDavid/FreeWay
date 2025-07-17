@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@freeway/common/components';
-import { LoginForm, useAuth } from '@freeway/modules/auth';
+import { Card, CardContent, CardHeader, CardTitle } from '@marzneshin/common/components';
+import { LoginForm, useAuth } from '@marzneshin/modules/auth';
 import { createFileRoute } from '@tanstack/react-router'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next';

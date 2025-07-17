@@ -1,13 +1,13 @@
 
-import { Button } from "@freeway/common/components";
-import { SelectableEntityTable, useRowSelection } from "@freeway/libs/entity-table";
+import { Button } from "@marzneshin/common/components";
+import { SelectableEntityTable, useRowSelection } from "@marzneshin/libs/entity-table";
 import { columns } from "./columns";
 import {
     type UserType,
     useUsersUpdateMutation,
-} from "@freeway/modules/users";
+} from "@marzneshin/modules/users";
 import { useTranslation } from "react-i18next";
-import { fetchUserServices } from "@freeway/modules/services";
+import { fetchUserServices } from "@marzneshin/modules/services";
 import { useState, useCallback, FC } from "react";
 
 interface UserServicesTableProps {

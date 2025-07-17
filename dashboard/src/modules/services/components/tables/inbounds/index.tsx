@@ -1,8 +1,8 @@
 import { type FC, useCallback, useState } from "react";
-import { Button } from "@freeway/common/components";
-import { SelectableEntityTable, useRowSelection } from "@freeway/libs/entity-table";
+import { Button } from "@marzneshin/common/components";
+import { SelectableEntityTable, useRowSelection } from "@marzneshin/libs/entity-table";
 import { columns } from "./columns";
-import { type ServiceType, useServicesUpdateMutation, fetchSelectableServiceInbounds } from "@freeway/modules/services";
+import { type ServiceType, useServicesUpdateMutation, fetchSelectableServiceInbounds } from "@marzneshin/modules/services";
 import { useTranslation } from "react-i18next";
 
 interface ServiceInboundsTableProps {

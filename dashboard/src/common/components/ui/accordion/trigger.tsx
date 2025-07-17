@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { cn } from "@freeway/common/utils";
+import { cn } from "@marzneshin/common/utils";
 import { ChevronDown } from "lucide-react";
 
 export const AccordionTrigger = React.forwardRef<

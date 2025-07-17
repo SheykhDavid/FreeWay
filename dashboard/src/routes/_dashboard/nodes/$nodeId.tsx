@@ -7,13 +7,13 @@ import {
 import {
     fetchNode,
     RouterNodeContext
-} from "@freeway/modules/nodes";
+} from "@marzneshin/modules/nodes";
 import { Suspense } from "react";
 import {
     AlertDialog,
     AlertDialogContent,
     Loading,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 
 const NodeProvider = () => {
     const { node } = Route.useLoaderData()

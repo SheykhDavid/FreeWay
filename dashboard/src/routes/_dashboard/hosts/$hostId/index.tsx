@@ -5,8 +5,8 @@ import {
 import {
     useRouterHostContext,
     HostSettingsDialog,
-} from "@freeway/modules/hosts";
-import { useDialog } from "@freeway/common/hooks";
+} from "@marzneshin/modules/hosts";
+import { useDialog } from "@marzneshin/common/hooks";
 
 const HostOpen = () => {
     const [settingsDialogOpen, setSettingsDialogOpen] = useDialog(true);

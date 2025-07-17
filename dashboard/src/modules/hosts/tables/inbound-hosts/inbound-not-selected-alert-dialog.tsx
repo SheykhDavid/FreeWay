@@ -7,7 +7,7 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle
-} from '@freeway/common/components'
+} from '@marzneshin/common/components'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 

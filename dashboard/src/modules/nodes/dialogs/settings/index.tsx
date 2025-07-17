@@ -6,7 +6,7 @@ import {
     TabsList,
     TabsTrigger,
     AlertCard,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -14,7 +14,7 @@ import {
     NodeType,
     NodesDetailTable,
     NodesUsageWidget
-} from "@freeway/modules/nodes";
+} from "@marzneshin/modules/nodes";
 import { NodeBackendSetting } from "./node-backend-setting";
 
 interface NodesSettingsDialogProps extends SettingsDialogProps {

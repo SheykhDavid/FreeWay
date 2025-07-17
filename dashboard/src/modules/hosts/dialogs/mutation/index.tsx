@@ -7,7 +7,7 @@ import {
     DialogTitle,
     Form,
     ScrollArea,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
@@ -16,14 +16,14 @@ import {
     type HostWithProfileType,
     useHostsCreationMutation,
     useHostsUpdateMutation,
-} from "@freeway/modules/hosts";
-import { type MutationDialogProps, useDialog } from "@freeway/common/hooks";
-import { ProtocolType } from "@freeway/modules/inbounds";
+} from "@marzneshin/modules/hosts";
+import { type MutationDialogProps, useDialog } from "@marzneshin/common/hooks";
+import { ProtocolType } from "@marzneshin/modules/inbounds";
 import { useProfileStrategy } from "./profiles";
 import {
     transformToDictionary,
     transformToFields,
-} from "@freeway/libs/dynamic-field";
+} from "@marzneshin/libs/dynamic-field";
 
 interface HostMutationDialogProps
     extends MutationDialogProps<HostWithProfileType> {

@@ -9,7 +9,7 @@ import {
     Table,
     TableBody,
     TableRowWithCell,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import type { FC } from "react";
 import { UserStatusEnableButton } from "./user-status-enable-button";
 import {
@@ -20,7 +20,7 @@ import {
     type UserProp,
     UserUsedTraffic,
     useUserUsageResetCmd,
-} from "@freeway/modules/users";
+} from "@marzneshin/modules/users";
 import { useTranslation } from "react-i18next";
 import { formatDistanceToNow } from "date-fns";
 import { format } from "@chbphone55/pretty-bytes";

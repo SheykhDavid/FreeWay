@@ -3,16 +3,16 @@ import {
     Outlet,
 } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { queryClient } from "@freeway/common/utils";
+import { queryClient } from "@marzneshin/common/utils";
 import {
     RouterAdminContext,
     adminQueryOptions,
-} from "@freeway/modules/admins";
+} from "@marzneshin/modules/admins";
 import { Suspense, useMemo } from "react";
 import {
     AlertDialog,
     AlertDialogContent,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 
 const AdminProvider = () => {
     const { username } = Route.useLoaderData()

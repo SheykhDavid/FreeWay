@@ -1,4 +1,4 @@
-import { UserType } from "@freeway/modules/users";
+import { UserType } from "@marzneshin/modules/users";
 
 export interface UserProp {
     user: UserType;

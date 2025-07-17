@@ -5,8 +5,8 @@ import {
 import {
     useRouterAdminContext,
     AdminsSettingsDialog,
-} from "@freeway/modules/admins";
-import { useDialog } from "@freeway/common/hooks";
+} from "@marzneshin/modules/admins";
+import { useDialog } from "@marzneshin/common/hooks";
 
 const AdminOpen = () => {
     const [settingsDialogOpen, setSettingsDialogOpen] = useDialog(true);

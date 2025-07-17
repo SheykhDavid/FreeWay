@@ -5,7 +5,7 @@ import {
 import {
     HostsMutationDialog,
     useRouterHostContext,
-} from "@freeway/modules/hosts";
+} from "@marzneshin/modules/hosts";
 
 const HostEdit = () => {
     const value = useRouterHostContext()

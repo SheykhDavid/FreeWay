@@ -1,4 +1,4 @@
-import { NodeType } from "@freeway/modules/nodes";
+import { NodeType } from "@marzneshin/modules/nodes";
 
 export type ProtocolType =
     "wireguard"

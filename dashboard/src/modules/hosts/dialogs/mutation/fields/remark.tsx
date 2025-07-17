@@ -8,8 +8,8 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-} from "@freeway/common/components";
-import { PopoverGuide } from '@freeway/modules/hosts';
+} from "@marzneshin/common/components";
+import { PopoverGuide } from '@marzneshin/modules/hosts';
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { InfoIcon } from 'lucide-react';

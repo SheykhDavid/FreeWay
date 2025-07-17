@@ -5,8 +5,8 @@ import {
 import {
     NodesDeleteConfirmationDialog,
     useRouterNodeContext,
-} from "@freeway/modules/nodes";
-import { useDialog } from "@freeway/common/hooks";
+} from "@marzneshin/modules/nodes";
+import { useDialog } from "@marzneshin/common/hooks";
 
 const NodeDelete = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useDialog(true);

@@ -2,7 +2,7 @@ import { CircularProgress } from "@nextui-org/progress";
 import {
     TableCell,
     TableRow,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useTranslation } from "react-i18next";
 import type { FC } from "react";
 

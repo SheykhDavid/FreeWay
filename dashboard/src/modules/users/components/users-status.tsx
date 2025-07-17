@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Badge, Label } from '@freeway/common/components';
-import { StatusType } from '@freeway/common/types';
+import { Badge, Label } from '@marzneshin/common/components';
+import { StatusType } from '@marzneshin/common/types';
 import {
     AlarmClock,
     BrickWall,

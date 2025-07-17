@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, HTMLAttributes } from "react";
-import { cn } from "@freeway/common/utils";
+import { cn } from "@marzneshin/common/utils";
 
 export const VStack: FC<PropsWithChildren & HTMLAttributes<HTMLDivElement>> = ({
     children,

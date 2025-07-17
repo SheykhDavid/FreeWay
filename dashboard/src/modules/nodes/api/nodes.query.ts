@@ -1,11 +1,11 @@
-import type { NodeType } from "@freeway/modules/nodes";
+import type { NodeType } from "@marzneshin/modules/nodes";
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@freeway/common/utils";
+import { fetch } from "@marzneshin/common/utils";
 import type {
     EntityQueryKeyType,
     UseEntityQueryProps,
     FetchEntityReturn
-} from "@freeway/libs/entity-table";
+} from "@marzneshin/libs/entity-table";
 
 export async function fetchNodes({
     queryKey,

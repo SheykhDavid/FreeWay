@@ -1,7 +1,7 @@
 import Editor from "@monaco-editor/react";
-import { useTheme } from "@freeway/features/theme-switch";
+import { useTheme } from "@marzneshin/features/theme-switch";
 import { useNodesSettings } from "./use-nodes-settings";
-import { Button, Awaiting } from "@freeway/common/components";
+import { Button, Awaiting } from "@marzneshin/common/components";
 import { useTranslation } from "react-i18next";
 import type { NodeType } from "../..";
 

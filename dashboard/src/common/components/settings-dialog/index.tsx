@@ -5,7 +5,7 @@ import {
     SheetContent,
     SheetHeader,
     SheetTitle,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useTranslation } from "react-i18next";
 
 export interface SettingsDialogProps {

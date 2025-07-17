@@ -5,16 +5,16 @@ import {
     DialogHeader,
     Form,
     Button,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { type FC, useMemo } from "react";
 import {
     type ServiceType,
     useServicesCreationMutation,
     useServicesUpdateMutation,
-} from "@freeway/modules/services";
+} from "@marzneshin/modules/services";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
-import { useMutationDialog, MutationDialogProps } from "@freeway/common/hooks";
+import { useMutationDialog, MutationDialogProps } from "@marzneshin/common/hooks";
 import { NameField, InboundsField } from "./fields";
 
 export const ServiceSchema = z.object({

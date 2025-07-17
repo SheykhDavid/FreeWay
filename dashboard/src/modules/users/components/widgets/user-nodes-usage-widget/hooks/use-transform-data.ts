@@ -1,4 +1,4 @@
-import { UserNodeUsagesResponse } from "@freeway/modules/users";
+import { UserNodeUsagesResponse } from "@marzneshin/modules/users";
 
 export type ChartDataEntry = {
     datetime: string;

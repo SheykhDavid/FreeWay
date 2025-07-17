@@ -6,7 +6,7 @@ import {
     FormLabel,
     FormMessage,
     Input,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useFormContext } from "react-hook-form";
 import { X } from "lucide-react";
 

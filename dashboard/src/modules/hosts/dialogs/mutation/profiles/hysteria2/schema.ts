@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { HostSchema, TlsSchema } from "@freeway/modules/hosts";
+import { HostSchema, TlsSchema } from "@marzneshin/modules/hosts";
 
 export const Hysteria2Schema =
     HostSchema.merge(

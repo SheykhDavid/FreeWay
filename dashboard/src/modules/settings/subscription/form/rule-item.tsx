@@ -12,8 +12,8 @@ import {
     SelectTrigger,
     SelectValue,
     DeleteConfirmation
-} from "@freeway/common/components";
-import { useDialog } from "@freeway/common/hooks";
+} from "@marzneshin/common/components";
+import { useDialog } from "@marzneshin/common/hooks";
 import {
     Schema
 } from "./schema"

@@ -1,4 +1,4 @@
-import { BadgeVariantKeys } from "@freeway/common/components";
+import { BadgeVariantKeys } from "@marzneshin/common/components";
 import { LucideIcon } from "lucide-react";
 
 export interface StatusType {

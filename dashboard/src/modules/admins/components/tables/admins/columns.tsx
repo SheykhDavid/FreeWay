@@ -3,18 +3,18 @@ import {
     type AdminType,
     AdminEnabledPill,
     AdminPermissionPill,
-} from "@freeway/modules/admins";
+} from "@marzneshin/modules/admins";
 import {
     DataTableActionsCell,
     DataTableColumnHeader
-} from "@freeway/libs/entity-table"
-import i18n from "@freeway/features/i18n";
+} from "@marzneshin/libs/entity-table"
+import i18n from "@marzneshin/features/i18n";
 import {
     NoPropogationButton,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import {
     type ColumnActions
-} from "@freeway/libs/entity-table";
+} from "@marzneshin/libs/entity-table";
 
 export const columns = (actions: ColumnActions<AdminType>): ColumnDef<AdminType, any>[] => [
     {

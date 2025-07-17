@@ -1,6 +1,6 @@
 import {
     Skeleton,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 export function UsageGraphSkeleton() {
     return (
         <div className="p-4 rounded-lg bg-muted">

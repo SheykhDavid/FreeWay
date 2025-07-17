@@ -3,10 +3,10 @@ import { type FC } from 'react';
 import {
     Badge,
     Label,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import {
     type InboundType
-} from '@freeway/modules/inbounds';
+} from '@marzneshin/modules/inbounds';
 
 export const InboundCardHeader: FC<{ entity: InboundType }> = ({ entity }) => {
     return (

@@ -1,7 +1,7 @@
 
-import { DeleteConfirmation } from '@freeway/common/components'
+import { DeleteConfirmation } from '@marzneshin/common/components'
 import { FC, useEffect } from 'react'
-import { NodeType, useNodesDeletionMutation } from '@freeway/modules/nodes'
+import { NodeType, useNodesDeletionMutation } from '@marzneshin/modules/nodes'
 
 interface NodesDeleteConfirmationDialogProps {
     onOpenChange: (state: boolean) => void

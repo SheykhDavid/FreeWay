@@ -1,8 +1,8 @@
-import { HostType } from "@freeway/modules/hosts";
+import { HostType } from "@marzneshin/modules/hosts";
 import { useMutation } from "@tanstack/react-query";
-import { fetch, queryClient } from "@freeway/common/utils";
+import { fetch, queryClient } from "@marzneshin/common/utils";
 import { toast } from "sonner";
-import i18n from "@freeway/features/i18n";
+import i18n from "@marzneshin/features/i18n";
 import { HostUpdateRequestDto } from "./host-mutation.dto";
 
 export async function fetchHostsUpdateMutation({ hostId, host }: HostUpdateRequestDto): Promise<HostUpdateRequestDto> {

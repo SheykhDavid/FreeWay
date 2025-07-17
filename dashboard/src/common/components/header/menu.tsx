@@ -7,16 +7,16 @@ import {
     DropdownMenuTrigger,
     DropdownMenuGroup,
     Button,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { Link } from "@tanstack/react-router";
 import { FC } from 'react';
 import { Settings, MenuIcon, ShieldCheck } from "lucide-react";
-import { LanguageSwitchMenu } from "@freeway/features/language-switch";
-import { ThemeToggle } from "@freeway/features/theme-switch";
-import { useAuth, Logout } from "@freeway/modules/auth";
-import { useScreenBreakpoint } from "@freeway/common/hooks/use-screen-breakpoint";
+import { LanguageSwitchMenu } from "@marzneshin/features/language-switch";
+import { ThemeToggle } from "@marzneshin/features/theme-switch";
+import { useAuth, Logout } from "@marzneshin/modules/auth";
+import { useScreenBreakpoint } from "@marzneshin/common/hooks/use-screen-breakpoint";
 import { useTranslation } from "react-i18next";
-import { VersionIndicator } from "@freeway/features/version-indicator";
+import { VersionIndicator } from "@marzneshin/features/version-indicator";
 
 export const HeaderMenu: FC = () => {
 

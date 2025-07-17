@@ -8,7 +8,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useTranslation } from "react-i18next";
 
 export const XudpProxy443Field = ({

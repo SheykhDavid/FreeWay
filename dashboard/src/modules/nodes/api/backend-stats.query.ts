@@ -1,6 +1,6 @@
-import type { NodeType } from "@freeway/modules/nodes";
+import type { NodeType } from "@marzneshin/modules/nodes";
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@freeway/common/utils";
+import { fetch } from "@marzneshin/common/utils";
 
 type NodeBackendStatsQueryKey = [string, number, string, string];
 

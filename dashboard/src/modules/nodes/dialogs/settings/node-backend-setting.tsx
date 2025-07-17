@@ -8,7 +8,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { NodeConfigEditor } from "./node-config-editor";
 import { LogContainer } from "../../log";
 import { useTranslation } from "react-i18next";

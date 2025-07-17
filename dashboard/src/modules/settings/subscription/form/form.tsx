@@ -13,7 +13,7 @@ import {
     Separator,
     Awaiting,
     CheckboxField,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { Schema } from "./schema"
 import { Overlay } from "./overlay"
 import {
@@ -26,7 +26,7 @@ import { NoRulesAlert } from "./no-rules-alert";
 import {
     useSubscriptionSettingsQuery,
     useSubscriptionSettingsMutation,
-} from "@freeway/modules/settings/subscription";
+} from "@marzneshin/modules/settings/subscription";
 import { useEffect, useCallback } from "react";
 
 export function SubscriptionRulesForm() {

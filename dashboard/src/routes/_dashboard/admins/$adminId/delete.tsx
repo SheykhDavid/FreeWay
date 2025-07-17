@@ -5,8 +5,8 @@ import {
 import {
     AdminsDeleteConfirmationDialog,
     useRouterAdminContext,
-} from "@freeway/modules/admins";
-import { useDialog } from "@freeway/common/hooks";
+} from "@marzneshin/modules/admins";
+import { useDialog } from "@marzneshin/common/hooks";
 
 const AdminDelete = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useDialog(true);

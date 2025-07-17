@@ -1,7 +1,7 @@
 import {
     SectionWidget
-} from "@freeway/common/components";
-import { SubscriptionRulesForm } from "@freeway/modules/settings/subscription";
+} from "@marzneshin/common/components";
+import { SubscriptionRulesForm } from "@marzneshin/modules/settings/subscription";
 import { useTranslation } from "react-i18next";
 
 export const SubscriptionSettingsWidget = () => {

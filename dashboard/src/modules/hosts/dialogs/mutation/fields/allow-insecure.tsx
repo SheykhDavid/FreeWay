@@ -9,7 +9,7 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

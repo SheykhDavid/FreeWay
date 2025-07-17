@@ -1,9 +1,9 @@
-import { Page, Loading } from '@freeway/common/components'
-import { ServicesTable } from '@freeway/modules/services'
+import { Page, Loading } from '@marzneshin/common/components'
+import { ServicesTable } from '@marzneshin/modules/services'
 import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
 import { type FC, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SudoRoute } from '@freeway/libs/sudo-routes'
+import { SudoRoute } from '@marzneshin/libs/sudo-routes'
 
 export const ServicesPage: FC = () => {
   const { t } = useTranslation()

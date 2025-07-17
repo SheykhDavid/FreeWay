@@ -3,9 +3,9 @@ import {
     Button,
     FormLabel,
     ScrollArea,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { DynamicField } from "@freeway/libs/dynamic-field";
+import { DynamicField } from "@marzneshin/libs/dynamic-field";
 import { useTranslation } from "react-i18next";
 import { ListPlus, Trash } from "lucide-react";
 

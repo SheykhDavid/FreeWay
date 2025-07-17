@@ -7,7 +7,7 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

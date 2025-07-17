@@ -1,6 +1,6 @@
 
-import { fetch } from "@freeway/common/utils"
-import { LoginSchema, useAuth } from "@freeway/modules/auth";
+import { fetch } from "@marzneshin/common/utils"
+import { LoginSchema, useAuth } from "@marzneshin/modules/auth";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -14,7 +14,7 @@ import {
     FormLabel,
     FormMessage,
     Input
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { useTranslation } from "react-i18next";
 import { FormError } from "./form-error";
 

@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { fetch, queryClient } from "@freeway/common/utils";
+import { fetch, queryClient } from "@marzneshin/common/utils";
 import { toast } from "sonner";
-import i18n from "@freeway/features/i18n";
+import i18n from "@marzneshin/features/i18n";
 import {
     UsersQueryFetchKey,
     UserMutationType
-} from "@freeway/modules/users";
+} from "@marzneshin/modules/users";
 
 export async function userUsageReset(user: UserMutationType): Promise<UserMutationType> {
     return fetch(`/users/${user.username}/reset`, { method: 'post', body: user }).then((user) => {

@@ -5,8 +5,8 @@ import {
 import {
     useRouterUserContext,
     UsersSettingsDialog,
-} from "@freeway/modules/users";
-import { useDialog } from "@freeway/common/hooks";
+} from "@marzneshin/modules/users";
+import { useDialog } from "@marzneshin/common/hooks";
 
 const UserOpen = () => {
     const [settingsDialogOpen, setSettingsDialogOpen] = useDialog(true);

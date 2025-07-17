@@ -1,9 +1,9 @@
-import { DeleteConfirmation } from "@freeway/common/components";
+import { DeleteConfirmation } from "@marzneshin/common/components";
 import { type FC, useEffect } from "react";
 import {
     type UserMutationType,
     useUsersDeletionMutation,
-} from "@freeway/modules/users";
+} from "@marzneshin/modules/users";
 
 interface UsersDeleteConfirmationDialogProps {
     onOpenChange: (state: boolean) => void;

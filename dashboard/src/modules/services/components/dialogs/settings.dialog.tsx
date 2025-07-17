@@ -5,14 +5,14 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { type FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ServicesUsersTable,
   ServiceInboundsTable,
   ServiceType,
-} from "@freeway/modules/services";
+} from "@marzneshin/modules/services";
 
 interface ServicecSettingsDialogProps extends SettingsDialogProps {
   entity: ServiceType;

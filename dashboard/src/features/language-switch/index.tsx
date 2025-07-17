@@ -4,11 +4,11 @@ import {
     DropdownMenuItem,
     DropdownMenuSubTrigger,
     DropdownMenuPortal
-} from "@freeway/common/components";
+} from "@marzneshin/common/components";
 import { Languages } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { cn } from "@freeway/common/utils";
+import { cn } from "@marzneshin/common/utils";
 
 const LanguageItem = ({ language, title }: { language: string, title: string }) => {
     const { i18n } = useTranslation();
