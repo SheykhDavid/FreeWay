@@ -114,7 +114,24 @@ install_package () {
 install_docker() {
     # Install Docker and Docker Compose using the official installation script
     colorized_echo blue "Installing Docker"
-    curl -fsSL https://get.docker.com | sh
+    
+    # Download script to temporary file for verification
+    DOCKER_SCRIPT="/tmp/get-docker.sh"
+    colorized_echo blue "Downloading Docker installation script..."
+    curl -fsSL https://get.docker.com -o "$DOCKER_SCRIPT"
+    
+    # Basic verification - check if script looks legitimate
+    if ! grep -q "Docker Inc" "$DOCKER_SCRIPT" || ! grep -q "get.docker.com" "$DOCKER_SCRIPT"; then
+        colorized_echo red "Downloaded script does not appear to be the official Docker installer"
+        rm -f "$DOCKER_SCRIPT"
+        exit 1
+    fi
+    
+    # Make executable and run
+    chmod +x "$DOCKER_SCRIPT"
+    "$DOCKER_SCRIPT"
+    rm -f "$DOCKER_SCRIPT"
+    
     colorized_echo green "Docker installed successfully"
 }
 
