@@ -21,6 +21,7 @@ from app.config.env import (
     UVICORN_SSL_CERTFILE,
     UVICORN_SSL_KEYFILE,
     UVICORN_UDS,
+    UVICORN_WORKERS,
     DASHBOARD_PATH,
     TASKS_RECORD_USER_USAGES_INTERVAL,
     TASKS_REVIEW_USERS_INTERVAL,
@@ -45,6 +46,8 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     await nodes_startup()
+    setup_scheduler()
+    scheduler.start()
     yield
     scheduler.shutdown()
 
@@ -71,39 +74,56 @@ def home_page():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:8080", 
+        "https://yourdomain.com"  # Replace with actual domain
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 scheduler = AsyncIOScheduler(timezone="UTC")
-scheduler.add_job(
-    record_user_usages,
-    "interval",
-    coalesce=True,
-    seconds=TASKS_RECORD_USER_USAGES_INTERVAL,
-)
-scheduler.add_job(
-    review_users,
-    "interval",
-    seconds=TASKS_REVIEW_USERS_INTERVAL,
-    coalesce=True,
-    max_instances=1,
-)
-scheduler.add_job(
-    expire_days_reached,
-    "interval",
-    seconds=TASKS_EXPIRE_DAYS_REACHED_INTERVAL,
-    coalesce=True,
-    max_instances=1,
-)
-scheduler.add_job(
-    reset_user_data_usage,
-    "interval",
-    seconds=TASKS_RESET_USER_DATA_USAGE,
-    coalesce=True,
-)
+
+def setup_scheduler():
+    """Setup scheduler jobs - only run in one worker to avoid duplication"""
+    import os
+    # Only setup scheduler in the main worker (identified by WORKER_ID or lack thereof)
+    worker_id = os.environ.get("WORKER_ID", "0")
+    if worker_id == "0" or not worker_id:
+        scheduler.add_job(
+            record_user_usages,
+            "interval",
+            coalesce=True,
+            seconds=TASKS_RECORD_USER_USAGES_INTERVAL,
+            max_instances=1,
+            id="record_user_usages"
+        )
+        scheduler.add_job(
+            review_users,
+            "interval",
+            seconds=TASKS_REVIEW_USERS_INTERVAL,
+            coalesce=True,
+            max_instances=1,
+            id="review_users"
+        )
+        scheduler.add_job(
+            expire_days_reached,
+            "interval",
+            seconds=TASKS_EXPIRE_DAYS_REACHED_INTERVAL,
+            coalesce=True,
+            max_instances=1,
+            id="expire_days_reached"
+        )
+        scheduler.add_job(
+            reset_user_data_usage,
+            "interval",
+            seconds=TASKS_RESET_USER_DATA_USAGE,
+            coalesce=True,
+            max_instances=1,
+            id="reset_user_data_usage"
+        )
 
 
 @app.exception_handler(RequestValidationError)
@@ -136,7 +156,6 @@ async def main():
             StaticFiles(directory="dashboard/dist/locales"),
             name="locales",
         )
-    scheduler.start()
     cfg = Config(
         app=app,
         host=UVICORN_HOST,
@@ -144,7 +163,7 @@ async def main():
         uds=(None if DEBUG else UVICORN_UDS),
         ssl_certfile=UVICORN_SSL_CERTFILE,
         ssl_keyfile=UVICORN_SSL_KEYFILE,
-        workers=1,
+        workers=UVICORN_WORKERS,
         reload=DEBUG,
         log_level=logging.DEBUG if DEBUG else logging.INFO,
     )

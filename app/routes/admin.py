@@ -30,7 +30,13 @@ def authenticate_admin(
     db: Session, username: str, password: str
 ) -> Optional[Admin]:
     dbadmin = crud.get_admin(db, username)
+    
+    # Always perform password verification to prevent timing attacks
+    # Use a dummy hash if user doesn't exist
     if not dbadmin:
+        # Perform dummy password verification with a fake hash to normalize timing
+        from app.models.admin import pwd_context
+        pwd_context.verify(password, "$2b$12$dummy.hash.to.prevent.timing.attacks.abcdefghijklmnopqrstuvwxy")
         return None
 
     return (
