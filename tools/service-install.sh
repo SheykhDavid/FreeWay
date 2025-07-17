@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SERVICE_NAME="marzneshin"
-SERVICE_DESCRIPTION="Marzneshin Service"
+SERVICE_DESCRIPTION="FreeWay Service"
 SERVICE_DOCUMENTATION="https://docs.marzneshin.org"
 MAIN_PY_PATH="$PWD/main.py"
 SERVICE_FILE="/etc/systemd/system/$SERVICE_NAME.service"

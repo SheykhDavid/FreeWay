@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+# FreeWay management script - compatible with existing marzneshin Docker images
 APP_NAME="marzneshin"
 NODE_NAME="marznode"
 CONFIG_DIR="/etc/opt/$APP_NAME"
@@ -29,13 +30,13 @@ colorized_echo() {
         "cyan")
         printf "\e[96m${text}\e[0m\n";;
         *)
-            echo "${text}"
+        echo "${text}"
         ;;
     esac
 }
 
 check_running_as_root() {
-    if [ "$(id -u)" != "0" ]; then
+    if [[ $EUID -ne 0 ]]; then
         colorized_echo red "This command must be run as root."
         exit 1
     fi
@@ -43,13 +44,13 @@ check_running_as_root() {
 
 detect_os() {
     # Detect the operating system
-    if [ -f /etc/lsb-release ]; then
+    if [[ -f /etc/lsb-release ]]; then
         OS=$(lsb_release -si)
-        elif [ -f /etc/os-release ]; then
+    elif [[ -f /etc/os-release ]]; then
         OS=$(awk -F= '/^NAME/{print $2}' /etc/os-release | tr -d '"')
-        elif [ -f /etc/redhat-release ]; then
+    elif [[ -f /etc/redhat-release ]]; then
         OS=$(cat /etc/redhat-release | awk '{print $1}')
-        elif [ -f /etc/arch-release ]; then
+    elif [[ -f /etc/arch-release ]]; then
         OS="Arch"
     else
         colorized_echo red "Unsupported operating system"
@@ -62,14 +63,13 @@ detect_and_update_package_manager() {
     if [[ "$OS" == "Ubuntu"* ]] || [[ "$OS" == "Debian"* ]]; then
         PKG_MANAGER="apt-get"
         $PKG_MANAGER update
-        elif [[ "$OS" == "CentOS"* ]] || [[ "$OS" == "AlmaLinux"* ]]; then
+    elif [[ "$OS" == "CentOS"* ]] || [[ "$OS" == "AlmaLinux"* ]] || [[ "$OS" == "Rocky"* ]]; then
         PKG_MANAGER="yum"
         $PKG_MANAGER update -y
-        $PKG_MANAGER install -y epel-release
-        elif [ "$OS" == "Fedora"* ]; then
+    elif [[ "$OS" == "Fedora"* ]]; then
         PKG_MANAGER="dnf"
-        $PKG_MANAGER update
-        elif [ "$OS" == "Arch" ]; then
+        $PKG_MANAGER update -y
+    elif [[ "$OS" == "Arch"* ]]; then
         PKG_MANAGER="pacman"
         $PKG_MANAGER -Sy
     else
@@ -79,10 +79,9 @@ detect_and_update_package_manager() {
 }
 
 detect_compose() {
-    # Check if docker compose command exists
-    if docker compose >/dev/null 2>&1; then
+    if docker compose version &> /dev/null; then
         COMPOSE='docker compose'
-        elif docker-compose >/dev/null 2>&1; then
+    elif docker-compose --version &> /dev/null; then
         COMPOSE='docker-compose'
     else
         colorized_echo red "docker compose not found"
@@ -90,46 +89,25 @@ detect_compose() {
     fi
 }
 
-install_package () {
-    if [ -z $PKG_MANAGER ]; then
-        detect_and_update_package_manager
-    fi
-
-    PACKAGE=$1
-    colorized_echo blue "Installing $PACKAGE"
-    if [[ "$OS" == "Ubuntu"* ]] || [[ "$OS" == "Debian"* ]]; then
-        $PKG_MANAGER -y install "$PACKAGE"
-        elif [[ "$OS" == "CentOS"* ]] || [[ "$OS" == "AlmaLinux"* ]]; then
-        $PKG_MANAGER install -y "$PACKAGE"
-        elif [ "$OS" == "Fedora"* ]; then
-        $PKG_MANAGER install -y "$PACKAGE"
-        elif [ "$OS" == "Arch" ]; then
-        $PKG_MANAGER -S --noconfirm "$PACKAGE"
-    else
-        colorized_echo red "Unsupported operating system"
-        exit 1
-    fi
-}
-
 install_docker() {
-    # Install Docker and Docker Compose using the official installation script
     colorized_echo blue "Installing Docker"
     curl -fsSL https://get.docker.com | sh
+    systemctl enable --now docker
     colorized_echo green "Docker installed successfully"
 }
 
 install_marzneshin_script() {
-    colorized_echo blue "Installing freeway script"
-    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/marzneshin
-    colorized_echo green "freeway script installed successfully"
+    colorized_echo blue "Installing FreeWay script"
+    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/freeway
+    colorized_echo green "FreeWay script installed successfully"
 }
 
-install_marzneshin ) {
+install_marzneshin() {
     # Fetch releases
     FILES_URL_PREFIX="https://raw.githubusercontent.com/marzneshin/marzneshin/master"
-	COMPOSE_FILES_URL="https://raw.githubusercontent.com/marzneshin/marzneshin-deploy/master"
- 	database=$1
-  	nightly=$2
+    COMPOSE_FILES_URL="https://raw.githubusercontent.com/marzneshin/marzneshin-deploy/master"
+    database=$1
+    nightly=$2
   
     mkdir -p "$DATA_DIR"
     mkdir -p "$CONFIG_DIR"
@@ -137,10 +115,10 @@ install_marzneshin ) {
     colorized_echo blue "Fetching compose file"
     curl -sL "$COMPOSE_FILES_URL/docker-compose-$database.yml" -o "$CONFIG_DIR/docker-compose.yml"
     colorized_echo green "File saved in $CONFIG_DIR/docker-compose.yml"
-	if [ "$nightly" = true ]; then
-	    colorized_echo red "setting compose tag to nightly."
-	 	sed -ri "s/(dawsh\/marzneshin:)latest/\1nightly/g" $CONFIG_DIR/docker-compose.yml
-	fi
+    if [ "$nightly" = true ]; then
+        colorized_echo red "setting compose tag to nightly."
+        sed -ri "s/(dawsh\/marzneshin:)latest/\1nightly/g" $CONFIG_DIR/docker-compose.yml
+    fi
  
     colorized_echo blue "Fetching example .env file"
     curl -sL "$FILES_URL_PREFIX/.env.example" -o "$CONFIG_DIR/.env"
@@ -156,13 +134,14 @@ install_marznode_xray_config() {
 }
 
 uninstall_marzneshin_script() {
-    if [ -f "/usr/local/bin/marzneshin" ]; then
-        colorized_echo yellow "Removing freeway script"
-        rm "/usr/local/bin/marzneshin"
+    if [ -f "/usr/local/bin/freeway" ]; then
+        colorized_echo yellow "Removing FreeWay script"
+        rm "/usr/local/bin/freeway"
+        colorized_echo green "FreeWay script removed successfully"
     fi
 }
 
-uninstall_marzneshin ) {
+uninstall_marzneshin() {
     if [ -d "$CONFIG_DIR" ]; then
         colorized_echo yellow "Removing directory: $CONFIG_DIR"
         rm -r "$CONFIG_DIR"
@@ -179,6 +158,7 @@ uninstall_marzneshin_docker_images() {
                 colorized_echo yellow "Image $image removed"
             fi
         done
+        colorized_echo green "All FreeWay images removed"
     fi
 }
 
@@ -195,7 +175,6 @@ uninstall_marznode_data_files() {
         rm -r "$NODE_DATA_DIR"
     fi
 }
-
 
 up_marzneshin() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" up -d --remove-orphans
@@ -217,14 +196,13 @@ marzneshin_cli() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" exec -e CLI_PROG_NAME="freeway cli" marzneshin /app/marzneshin-cli.py "$@"
 }
 
-
 update_marzneshin_script() {
-    colorized_echo blue "Updating freeway script"
-    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/marzneshin
-    colorized_echo green "freeway script updated successfully"
+    colorized_echo blue "Updating FreeWay script"
+    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/freeway
+    colorized_echo green "FreeWay script updated successfully"
 }
 
-update_marzneshin ) {
+update_marzneshin() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" pull
 }
 
@@ -246,7 +224,7 @@ is_marzneshin_up() {
 
 install_command() {
     check_running_as_root
-    # Check if freeway is already installed
+    # Check if marzneshin is already installed
     if is_marzneshin_installed; then
         colorized_echo red "FreeWay is already installed at $CONFIG_DIR"
         read -p "Do you want to override the previous installation? (y/n) "
@@ -255,40 +233,38 @@ install_command() {
             exit 1
         fi
     fi
+
     detect_os
-    if ! command -v jq >/dev/null 2>&1; then
-        install_package jq
+    if ! command -v jq &> /dev/null; then
+        colorized_echo blue "Installing jq"
+        detect_and_update_package_manager
+        if [[ "$OS" == "Ubuntu"* ]] || [[ "$OS" == "Debian"* ]]; then
+            $PKG_MANAGER install -y jq
+        elif [[ "$OS" == "CentOS"* ]] || [[ "$OS" == "AlmaLinux"* ]] || [[ "$OS" == "Rocky"* ]]; then
+            $PKG_MANAGER install -y jq
+        elif [[ "$OS" == "Fedora"* ]]; then
+            $PKG_MANAGER install -y jq
+        elif [[ "$OS" == "Arch"* ]]; then
+            $PKG_MANAGER -S --noconfirm jq
+        fi
+        colorized_echo green "jq installed successfully"
     fi
-    if ! command -v curl >/dev/null 2>&1; then
-        install_package curl
-    fi
-    if ! command -v docker >/dev/null 2>&1; then
+
+    if ! command -v docker &> /dev/null; then
         install_docker
     fi
-	
+
     database="sqlite"
-	nightly=false
- 
-	while [[ "$#" -gt 0 ]]; do
-	    case $1 in
-	        -d|--database)
-		 		database="$2"
-				if [[ ! $database =~ ^(sqlite|mariadb|mysql)$ ]]; then
-				    echo "database could only be sqlite, mysql and mariadb."
-					exit 1
-				fi
-	            shift
-	            ;;
-			-n|--nightly)
-	            nightly=true
-	            ;;
-	        *)
-	            echo "Unknown option: $1"
-	            exit 1
-	            ;;
-	    esac
-	    shift
-	done
+    nightly=false
+
+    while [[ "$#" -gt 0 ]]; do
+        case $1 in
+            --dev) nightly=true ;;
+            --database) database="$2"; shift ;;
+            *) colorized_echo red "Unknown parameter: $1"; exit 1 ;;
+        esac
+        shift
+    done
 
     detect_compose
     install_marzneshin_script
@@ -300,11 +276,14 @@ install_command() {
 
 uninstall_command() {
     check_running_as_root
+
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
         colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
+
+    detect_compose
 
     read -p "Do you really want to uninstall FreeWay? (y/n) "
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -312,55 +291,28 @@ uninstall_command() {
         exit 1
     fi
 
-    detect_compose
     if is_marzneshin_up; then
         down_marzneshin
     fi
     uninstall_marzneshin_script
-    uninstall_freeway
+    uninstall_marzneshin
     uninstall_marzneshin_docker_images
 
-    read -p "Do you want to remove freeway & marznode data files too ($NODE_DATA_DIR, $DATA_DIR)? (y/n) "
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    read -p "Do you want to remove FreeWay & marznode data files too ($NODE_DATA_DIR, $DATA_DIR)? (y/n) "
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        uninstall_marzneshin_data_files
+        uninstall_marznode_data_files
         colorized_echo green "FreeWay uninstalled successfully"
     else
-        uninstall_marzneshin_data_files
-	uninstall_marznode_data_files
-        colorized_echo green "FreeWay uninstalled successfully"
+        colorized_echo green "FreeWay uninstalled successfully (data files kept)"
     fi
 }
 
 up_command() {
-    help() {
-        colorized_echo red "Usage: $0 up [options]"
-        echo ""
-        echo "OPTIONS:"
-        echo "  -h, --help        display this help message"
-        echo "  -n, --no-logs     do not follow logs after starting"
-    }
-
-    local no_logs=false
-    while [[ "$#" -gt 0 ]]; do
-        case "$1" in
-            -n|--no-logs)
-                no_logs=true
-            ;;
-            -h|--help)
-                help
-                exit 0
-            ;;
-            *)
-                echo "Error: Invalid option: $1" >&2
-                help
-                exit 0
-            ;;
-        esac
-        shift
-    done
-
+    check_running_as_root
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "FreeWay is not installed!"
+        colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
 
@@ -372,139 +324,15 @@ up_command() {
     fi
 
     up_marzneshin
-    if [ "$no_logs" = false ]; then
-        follow_marzneshin_logs
-    fi
+    colorized_echo green "FreeWay started successfully"
+    follow_marzneshin_logs
 }
 
 down_command() {
-
+    check_running_as_root
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
         colorized_echo red "FreeWay's not installed!"
-        exit 1
-    fi
-
-    detect_compose
-
-    if ! is_marzneshin_up; then
-        colorized_echo red "FreeWay's already down"
-        exit 1
-    fi
-
-    down_marzneshin
-}
-
-restart_command() {
-    help() {
-        colorized_echo red "Usage: $0 restart [options]"
-        echo
-        echo "OPTIONS:"
-        echo "  -h, --help        display this help message"
-        echo "  -n, --no-logs     do not follow logs after starting"
-    }
-
-    local no_logs=false
-    while [[ "$#" -gt 0 ]]; do
-        case "$1" in
-            -n|--no-logs)
-                no_logs=true
-            ;;
-            -h|--help)
-                help
-                exit 0
-            ;;
-            *)
-                echo "Error: Invalid option: $1" >&2
-                help
-                exit 0
-            ;;
-        esac
-        shift
-    done
-
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
-        colorized_echo red "FreeWay's not installed!"
-        exit 1
-    fi
-
-    detect_compose
-
-    down_marzneshin
-    up_marzneshin
-    if [ "$no_logs" = false ]; then
-        follow_marzneshin_logs
-    fi
-}
-
-status_command() {
-
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
-        echo -n "Status: "
-        colorized_echo red "Not Installed"
-        exit 1
-    fi
-
-    detect_compose
-
-    if ! is_marzneshin_up; then
-        echo -n "Status: "
-        colorized_echo blue "Down"
-        exit 1
-    fi
-
-    echo -n "Status: "
-    colorized_echo green "Up"
-
-    json=$($COMPOSE -f $COMPOSE_FILE ps -a --format=json)
-    services=$(echo "$json" | jq -r 'if type == "array" then .[] else . end | .Service')
-    states=$(echo "$json" | jq -r 'if type == "array" then .[] else . end | .State')
-    # Print out the service names and statuses
-    for i in $(seq 0 $(expr $(echo $services | wc -w) - 1)); do
-        service=$(echo $services | cut -d' ' -f $(expr $i + 1))
-        state=$(echo $states | cut -d' ' -f $(expr $i + 1))
-        echo -n "- $service: "
-        if [ "$state" == "running" ]; then
-            colorized_echo green $state
-        else
-            colorized_echo red $state
-        fi
-    done
-}
-
-logs_command() {
-    help() {
-        colorized_echo red "Usage: freeway logs [options]"
-        echo ""
-        echo "OPTIONS:"
-        echo "  -h, --help        display this help message"
-        echo "  -n, --no-follow   do not show follow logs"
-    }
-
-    local no_follow=false
-    while [[ "$#" -gt 0 ]]; do
-        case "$1" in
-            -n|--no-follow)
-                no_follow=true
-            ;;
-            -h|--help)
-                help
-                exit 0
-            ;;
-            *)
-                echo "Error: Invalid option: $1" >&2
-                help
-                exit 0
-            ;;
-        esac
-        shift
-    done
-
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
-        colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
@@ -515,10 +343,60 @@ logs_command() {
         exit 1
     fi
 
-    if [ "$no_follow" = true ]; then
-        show_marzneshin_logs
-    else
+    down_marzneshin
+}
+
+restart_command() {
+    check_running_as_root
+    # Check if marzneshin is installed
+    if ! is_marzneshin_installed; then
+        colorized_echo red "FreeWay's not installed!"
+        exit 1
+    fi
+
+    detect_compose
+
+    down_marzneshin
+    up_marzneshin
+
+    follow_marzneshin_logs
+}
+
+status_command() {
+    # Check if marzneshin is installed
+    if ! is_marzneshin_installed; then
+        colorized_echo red "FreeWay's not installed!"
+        exit 1
+    fi
+
+    detect_compose
+
+    if ! is_marzneshin_up; then
+        colorized_echo red "FreeWay is not up."
+        exit 1
+    fi
+
+    $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" ps
+}
+
+logs_command() {
+    # Check if marzneshin is installed
+    if ! is_marzneshin_installed; then
+        colorized_echo red "FreeWay's not installed!"
+        exit 1
+    fi
+
+    detect_compose
+
+    if ! is_marzneshin_up; then
+        colorized_echo red "FreeWay is not up."
+        exit 1
+    fi
+
+    if [ "$1" = "-f" ] || [ "$1" = "--follow" ]; then
         follow_marzneshin_logs
+    else
+        show_marzneshin_logs
     fi
 }
 
@@ -543,7 +421,7 @@ update_command() {
     check_running_as_root
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "FreeWay is not installed!"
+        colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
 
@@ -551,54 +429,48 @@ update_command() {
 
     update_marzneshin_script
     colorized_echo blue "Pulling latest version"
-    update_freeway
+    update_marzneshin
 
     colorized_echo blue "Restarting FreeWay's services"
     down_marzneshin
     up_marzneshin
 
-    colorized_echo blue "FreeWay updated successfully"
+    follow_marzneshin_logs
 }
 
-
 usage() {
-    colorized_echo red "Usage: $0 [command]"
-    echo
-    echo "Commands:"
-    echo "  up              Start services"
-    echo "  down            Stop services"
-    echo "  restart         Restart services"
-    echo "  status          Show status"
-    echo "  logs            Show logs"
-    echo "  cli             FreeWay command-line interface"
-    echo "  install         Install FreeWay"
-    echo "  update          Update latest version"
-    echo "  uninstall       Uninstall FreeWay"
-    echo "  install-script  Install FreeWay script"
-    echo
+    colorized_echo cyan "FreeWay management script"
+    echo ""
+    colorized_echo yellow "Usage: $(basename "$0") [COMMAND]"
+    echo ""
+    colorized_echo yellow "Commands:"
+    colorized_echo blue "  install [options]     Install FreeWay"
+    colorized_echo blue "  uninstall             Uninstall FreeWay"
+    colorized_echo blue "  up                    Start FreeWay services"
+    colorized_echo blue "  down                  Stop FreeWay services"
+    colorized_echo blue "  restart               Restart FreeWay services"
+    colorized_echo blue "  status                Show FreeWay services status"
+    colorized_echo blue "  logs [options]        Show FreeWay logs"
+    colorized_echo blue "  cli [args]            FreeWay command-line interface"
+    colorized_echo blue "  update                Update FreeWay"
+    echo ""
+    colorized_echo yellow "Install options:"
+    colorized_echo blue "  --dev                 Install nightly version"
+    colorized_echo blue "  --database DB         Database type (sqlite/mysql/mariadb)"
+    echo ""
+    colorized_echo yellow "Log options:"
+    colorized_echo blue "  -f, --follow          Follow log output"
 }
 
 case "$1" in
-    up)
-    shift; up_command "$@";;
-    down)
-    shift; down_command "$@";;
-    restart)
-    shift; restart_command "$@";;
-    status)
-    shift; status_command "$@";;
-    logs)
-    shift; logs_command "$@";;
-    cli)
-    shift; cli_command "$@";;
-    install)
-    shift; install_command "$@";;
-    update)
-    shift; update_command "$@";;
-    uninstall)
-    shift; uninstall_command "$@";;
-    install-script)
-    shift; install_marzneshin_script "$@";;
-    *)
-    usage;;
+    "install") shift; install_command "$@";;
+    "uninstall") uninstall_command;;
+    "up") up_command;;
+    "down") down_command;;
+    "restart") restart_command;;
+    "status") status_command;;
+    "logs") shift; logs_command "$@";;
+    "cli") shift; cli_command "$@";;
+    "update") update_command;;
+    *) usage;;
 esac
