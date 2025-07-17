@@ -1,4 +1,4 @@
-import { AdminType } from "@marzneshin/modules/admins";
+import { AdminType } from "@freeway/modules/admins";
 
 export interface AdminProp {
     admin: AdminType;

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVICE_NAME="marzneshin"
+SERVICE_NAME="freeway"
 SERVICE_DESCRIPTION="FreeWay Service"
 SERVICE_DOCUMENTATION="https://docs.marzneshin.org"
 MAIN_PY_PATH="$PWD/main.py"

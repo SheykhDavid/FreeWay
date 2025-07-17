@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-APP_NAME="marzneshin"
+APP_NAME="freeway"
 NODE_NAME="marznode"
 CONFIG_DIR="/etc/opt/$APP_NAME"
 DATA_DIR="/var/lib/$APP_NAME"
@@ -118,13 +118,13 @@ install_docker() {
     colorized_echo green "Docker installed successfully"
 }
 
-install_marzneshin_script() {
+install_freeway_script() {
     colorized_echo blue "Installing freeway script"
-    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/marzneshin
+    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/freeway
     colorized_echo green "freeway script installed successfully"
 }
 
-install_marzneshin() {
+install_freeway() {
     # Fetch releases
     FILES_URL_PREFIX="https://raw.githubusercontent.com/marzneshin/marzneshin/master"
 	COMPOSE_FILES_URL="https://raw.githubusercontent.com/marzneshin/marzneshin-deploy/master"
@@ -155,21 +155,21 @@ install_marznode_xray_config() {
     colorized_echo green "Sample xray config downloaded for marznode"
 }
 
-uninstall_marzneshin_script() {
-    if [ -f "/usr/local/bin/marzneshin" ]; then
+uninstall_freeway_script() {
+    if [ -f "/usr/local/bin/freeway" ]; then
         colorized_echo yellow "Removing freeway script"
-        rm "/usr/local/bin/marzneshin"
+        rm "/usr/local/bin/freeway"
     fi
 }
 
-uninstall_marzneshin() {
+uninstall_freeway() {
     if [ -d "$CONFIG_DIR" ]; then
         colorized_echo yellow "Removing directory: $CONFIG_DIR"
         rm -r "$CONFIG_DIR"
     fi
 }
 
-uninstall_marzneshin_docker_images() {
+uninstall_freeway_docker_images() {
     images=$(docker images | grep marzneshin | awk '{print $3}')
 
     if [ -n "$images" ]; then
@@ -182,7 +182,7 @@ uninstall_marzneshin_docker_images() {
     fi
 }
 
-uninstall_marzneshin_data_files() {
+uninstall_freeway_data_files() {
     if [ -d "$DATA_DIR" ]; then
         colorized_echo yellow "Removing directory: $DATA_DIR"
         rm -r "$DATA_DIR"
@@ -197,38 +197,38 @@ uninstall_marznode_data_files() {
 }
 
 
-up_marzneshin() {
+up_freeway() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" up -d --remove-orphans
 }
 
-down_marzneshin() {
+down_freeway() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" down
 }
 
-show_marzneshin_logs() {
+show_freeway_logs() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" logs
 }
 
-follow_marzneshin_logs() {
+follow_freeway_logs() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" logs -f
 }
 
-marzneshin_cli() {
-    $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" exec -e CLI_PROG_NAME="marzneshin cli" marzneshin /app/marzneshin-cli.py "$@"
+freeway_cli() {
+    $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" exec -e CLI_PROG_NAME="freeway cli" freeway /app/freeway-cli.py "$@"
 }
 
 
-update_marzneshin_script() {
+update_freeway_script() {
     colorized_echo blue "Updating freeway script"
-    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/marzneshin
+    curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/freeway
     colorized_echo green "freeway script updated successfully"
 }
 
-update_marzneshin() {
+update_freeway() {
     $COMPOSE -f $COMPOSE_FILE -p "$APP_NAME" pull
 }
 
-is_marzneshin_installed() {
+is_freeway_installed() {
     if [ -d $CONFIG_DIR ]; then
         return 0
     else
@@ -236,7 +236,7 @@ is_marzneshin_installed() {
     fi
 }
 
-is_marzneshin_up() {
+is_freeway_up() {
     if [ -z "$($COMPOSE -f $COMPOSE_FILE ps -q -a)" ]; then
         return 1
     else
@@ -246,8 +246,8 @@ is_marzneshin_up() {
 
 install_command() {
     check_running_as_root
-    # Check if marzneshin is already installed
-    if is_marzneshin_installed; then
+    # Check if freeway is already installed
+    if is_freeway_installed; then
         colorized_echo red "FreeWay is already installed at $CONFIG_DIR"
         read -p "Do you want to override the previous installation? (y/n) "
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -291,17 +291,17 @@ install_command() {
 	done
 
     detect_compose
-    install_marzneshin_script
-    install_marzneshin $database $nightly
+    install_freeway_script
+    install_freeway $database $nightly
     install_marznode_xray_config
-    up_marzneshin
-    follow_marzneshin_logs
+    up_freeway
+    follow_freeway_logs
 }
 
 uninstall_command() {
     check_running_as_root
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
@@ -313,18 +313,18 @@ uninstall_command() {
     fi
 
     detect_compose
-    if is_marzneshin_up; then
-        down_marzneshin
+    if is_freeway_up; then
+        down_freeway
     fi
-    uninstall_marzneshin_script
-    uninstall_marzneshin
-    uninstall_marzneshin_docker_images
+    uninstall_freeway_script
+    uninstall_freeway
+    uninstall_freeway_docker_images
 
     read -p "Do you want to remove freeway & marznode data files too ($NODE_DATA_DIR, $DATA_DIR)? (y/n) "
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         colorized_echo green "FreeWay uninstalled successfully"
     else
-        uninstall_marzneshin_data_files
+        uninstall_freeway_data_files
 	uninstall_marznode_data_files
         colorized_echo green "FreeWay uninstalled successfully"
     fi
@@ -358,41 +358,41 @@ up_command() {
         shift
     done
 
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
     detect_compose
 
-    if is_marzneshin_up; then
+    if is_freeway_up; then
         colorized_echo red "FreeWay is already up"
         exit 1
     fi
 
-    up_marzneshin
+    up_freeway
     if [ "$no_logs" = false ]; then
-        follow_marzneshin_logs
+        follow_freeway_logs
     fi
 }
 
 down_command() {
 
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
 
     detect_compose
 
-    if ! is_marzneshin_up; then
+    if ! is_freeway_up; then
         colorized_echo red "FreeWay's already down"
         exit 1
     fi
 
-    down_marzneshin
+    down_freeway
 }
 
 restart_command() {
@@ -423,25 +423,25 @@ restart_command() {
         shift
     done
 
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
 
     detect_compose
 
-    down_marzneshin
-    up_marzneshin
+    down_freeway
+    up_freeway
     if [ "$no_logs" = false ]; then
-        follow_marzneshin_logs
+        follow_freeway_logs
     fi
 }
 
 status_command() {
 
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         echo -n "Status: "
         colorized_echo red "Not Installed"
         exit 1
@@ -449,7 +449,7 @@ status_command() {
 
     detect_compose
 
-    if ! is_marzneshin_up; then
+    if ! is_freeway_up; then
         echo -n "Status: "
         colorized_echo blue "Down"
         exit 1
@@ -502,60 +502,60 @@ logs_command() {
         shift
     done
 
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
     detect_compose
 
-    if ! is_marzneshin_up; then
+    if ! is_freeway_up; then
         colorized_echo red "FreeWay is not up."
         exit 1
     fi
 
     if [ "$no_follow" = true ]; then
-        show_marzneshin_logs
+        show_freeway_logs
     else
-        follow_marzneshin_logs
+        follow_freeway_logs
     fi
 }
 
 cli_command() {
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
     detect_compose
 
-    if ! is_marzneshin_up; then
+    if ! is_freeway_up; then
         colorized_echo red "FreeWay is not up."
         exit 1
     fi
 
-    marzneshin_cli "$@"
+    freeway_cli "$@"
 }
 
 update_command() {
     check_running_as_root
-    # Check if marzneshin is installed
-    if ! is_marzneshin_installed; then
+    # Check if freeway is installed
+    if ! is_freeway_installed; then
         colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
     detect_compose
 
-    update_marzneshin_script
+    update_freeway_script
     colorized_echo blue "Pulling latest version"
-    update_marzneshin
+    update_freeway
 
     colorized_echo blue "Restarting FreeWay's services"
-    down_marzneshin
-    up_marzneshin
+    down_freeway
+    up_freeway
 
     colorized_echo blue "FreeWay updated successfully"
 }
@@ -598,7 +598,7 @@ case "$1" in
     uninstall)
     shift; uninstall_command "$@";;
     install-script)
-    shift; install_marzneshin_script "$@";;
+    shift; install_freeway_script "$@";;
     *)
     usage;;
 esac

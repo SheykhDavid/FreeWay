@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { AdminType } from "@marzneshin/modules/admins";
+import { AdminType } from "@freeway/modules/admins";
 
 interface RouterAdminContextProps {
     admin: AdminType | null;

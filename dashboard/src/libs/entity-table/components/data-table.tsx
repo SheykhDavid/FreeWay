@@ -14,7 +14,7 @@ import {
 
 import {
     Button,
-} from "@marzneshin/common/components"
+} from "@freeway/common/components"
 
 import { useTranslation } from "react-i18next"
 import { DataTablePagination } from "./table-pagination"

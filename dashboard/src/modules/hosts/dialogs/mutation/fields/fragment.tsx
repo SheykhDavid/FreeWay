@@ -8,7 +8,7 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@marzneshin/common/components";
+} from "@freeway/common/components";
 import type { FieldErrors, FieldError } from "react-hook-form";
 import { useWatch, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

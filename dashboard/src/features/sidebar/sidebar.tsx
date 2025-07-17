@@ -1,13 +1,13 @@
 import {
     Sidebar,
     type SidebarItem,
-} from "@marzneshin/common/components";
-import { useIsCurrentRoute } from "@marzneshin/common/hooks";
+} from "@freeway/common/components";
+import { useIsCurrentRoute } from "@freeway/common/hooks";
 import type { FC } from "react";
 import { sidebarItems as sidebarItemsSudoAdmin, sidebarItemsNonSudoAdmin } from ".";
-import { projectInfo, cn } from "@marzneshin/common/utils";
-import { useAuth } from "@marzneshin/modules/auth";
-import { SupportUs } from "@marzneshin/features/support-us";
+import { projectInfo, cn } from "@freeway/common/utils";
+import { useAuth } from "@freeway/modules/auth";
+import { SupportUs } from "@freeway/features/support-us";
 
 interface DashboardSidebarProps {
     collapsed: boolean;

@@ -5,22 +5,22 @@ import {
     UserActivatedPill,
     UserExpireStrategyPill,
     UserExpirationValue
-} from "@marzneshin/modules/users";
-import { useAdminsQuery } from "@marzneshin/modules/admins";
-import i18n from "@marzneshin/features/i18n";
+} from "@freeway/modules/users";
+import { useAdminsQuery } from "@freeway/modules/admins";
+import i18n from "@freeway/features/i18n";
 import {
     CopyToClipboardButton,
     buttonVariants,
     NoPropogationButton,
-} from "@marzneshin/common/components";
+} from "@freeway/common/components";
 import { LinkIcon } from "lucide-react";
-import { getSubscriptionLink } from "@marzneshin/common/utils";
+import { getSubscriptionLink } from "@freeway/common/utils";
 import {
     DataTableColumnHeader,
     DataTableColumnHeaderFilterOption,
     DataTableActionsCell,
     type ColumnActions, type ColumnDefWithSudoRole
-} from "@marzneshin/libs/entity-table";
+} from "@freeway/libs/entity-table";
 import { type Column } from "@tanstack/react-table";
 
 export const columns = (actions: ColumnActions<UserType>): ColumnDefWithSudoRole<UserType>[] => [

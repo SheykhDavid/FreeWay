@@ -1,7 +1,7 @@
 
 import { FC, PropsWithChildren } from "react"
-import { Label } from "@marzneshin/common/components"
-import { cn } from "@marzneshin/common/utils"
+import { Label } from "@freeway/common/components"
+import { cn } from "@freeway/common/utils"
 import { useSidebarContext } from "./sidebar-provider";
 
 export interface SidebarGroupProps

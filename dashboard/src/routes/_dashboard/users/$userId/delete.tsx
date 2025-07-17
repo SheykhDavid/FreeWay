@@ -5,8 +5,8 @@ import {
 import {
     UsersDeleteConfirmationDialog,
     useRouterUserContext,
-} from "@marzneshin/modules/users";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@freeway/modules/users";
+import { useDialog } from "@freeway/common/hooks";
 
 const UserDelete = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useDialog(true);

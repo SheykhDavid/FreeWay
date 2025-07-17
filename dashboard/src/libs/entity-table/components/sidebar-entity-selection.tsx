@@ -2,16 +2,16 @@ import {
     ToggleGroup, ToggleGroupItem,
     Table, TableHeader, TableRow, TableBody, TableHead,
     ScrollArea, Button,
-} from "@marzneshin/common/components";
-import { useScreenBreakpoint } from "@marzneshin/common/hooks";
-import { cn } from "@marzneshin/common/utils";
+} from "@freeway/common/components";
+import { useScreenBreakpoint } from "@freeway/common/hooks";
+import { cn } from "@freeway/common/utils";
 import {
     SidebarEntityCard,
-} from "@marzneshin/libs/entity-table/components";
+} from "@freeway/libs/entity-table/components";
 import {
     useEntityTableContext,
     useSidebarEntityTableContext
-} from "@marzneshin/libs/entity-table/contexts";
+} from "@freeway/libs/entity-table/contexts";
 import { useTranslation } from "react-i18next";
 
 export const SidebarEntitySelection = () => {

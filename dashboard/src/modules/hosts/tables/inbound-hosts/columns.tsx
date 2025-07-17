@@ -1,16 +1,16 @@
 import { ColumnDef } from "@tanstack/react-table"
-import { HostType } from "@marzneshin/modules/hosts"
+import { HostType } from "@freeway/modules/hosts"
 import {
     DataTableActionsCell,
     DataTableColumnHeader
-} from "@marzneshin/libs/entity-table"
-import i18n from "@marzneshin/features/i18n"
+} from "@freeway/libs/entity-table"
+import i18n from "@freeway/features/i18n"
 import {
     type ColumnActions
-} from "@marzneshin/libs/entity-table";
+} from "@freeway/libs/entity-table";
 import {
     NoPropogationButton,
-} from "@marzneshin/common/components"
+} from "@freeway/common/components"
 
 export const columns = (actions: ColumnActions<HostType>): ColumnDef<HostType>[] => ([
     {

@@ -1,8 +1,8 @@
 
 import { type FC } from "react";
-import { Badge } from "@marzneshin/common/components";
+import { Badge } from "@freeway/common/components";
 import { useTranslation } from "react-i18next";
-import { UserProp } from "@marzneshin/modules/users";
+import { UserProp } from "@freeway/modules/users";
 
 export const UserExpireStrategyPill: FC<UserProp> = ({ user }) => {
     const { t } = useTranslation();

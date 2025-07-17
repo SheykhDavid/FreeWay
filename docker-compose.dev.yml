@@ -1,10 +1,10 @@
 services:
-  marzneshin:
+  freeway:
     build: .
     restart: always
     env_file: .env
     volumes:
-      - /var/lib/marzneshin:/var/lib/marzneshin
+      - /var/lib/freeway:/var/lib/freeway
 
   marznode:
     image: dawsh/marznode:latest

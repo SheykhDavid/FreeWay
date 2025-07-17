@@ -5,8 +5,8 @@ import {
 import {
     useRouterNodeContext,
     NodesSettingsDialog,
-} from "@marzneshin/modules/nodes";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@freeway/modules/nodes";
+import { useDialog } from "@freeway/common/hooks";
 
 const NodeOpen = () => {
     const [settingsDialogOpen, setSettingsDialogOpen] = useDialog(true);

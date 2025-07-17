@@ -14,8 +14,8 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@marzneshin/common/components"
-import { cn } from "@marzneshin/common/utils"
+} from "@freeway/common/components"
+import { cn } from "@freeway/common/utils"
 
 interface DataTableColumnHeaderProps<TData, TValue>
     extends React.HTMLAttributes<HTMLDivElement> {

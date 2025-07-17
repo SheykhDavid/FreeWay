@@ -1,6 +1,6 @@
-import { DeleteConfirmation } from '@marzneshin/common/components'
+import { DeleteConfirmation } from '@freeway/common/components'
 import { type FC, useEffect } from 'react'
-import { HostType, useHostsDeletionMutation } from '@marzneshin/modules/hosts'
+import { HostType, useHostsDeletionMutation } from '@freeway/modules/hosts'
 
 interface HostsDeleteConfirmationDialogProps {
     onOpenChange: (state: boolean) => void

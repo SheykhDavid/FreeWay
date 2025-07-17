@@ -4,15 +4,15 @@ import {
     TabsTrigger,
     TabsContent,
     FormLabel
-} from '@marzneshin/common/components';
+} from '@freeway/common/components';
 import type {
     UserMutationType,
-} from "@marzneshin/modules/users";
+} from "@freeway/modules/users";
 import {
     ExpireDateField,
     ActivationDeadlineField,
     UsageDurationField,
-} from "@marzneshin/modules/users/components/dialogs/mutation/fields";
+} from "@freeway/modules/users/components/dialogs/mutation/fields";
 import { TabsList } from "@radix-ui/react-tabs";
 import { useTranslation } from "react-i18next";
 import { useExpirationMethodTabs } from "./use-expiration-method-tabs";

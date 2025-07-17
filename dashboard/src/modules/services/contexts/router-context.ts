@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { ServiceType } from "@marzneshin/modules/services";
+import { ServiceType } from "@freeway/modules/services";
 
 interface RouterServiceContextProps {
     service: ServiceType;

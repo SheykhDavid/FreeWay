@@ -1,10 +1,10 @@
 import {
     Card,
     CardContent,
-} from "@marzneshin/common/components";
+} from "@freeway/common/components";
 import {
     cn
-} from "@marzneshin/common/utils";
+} from "@freeway/common/utils";
 import { type FC } from 'react'
 
 interface SidebarEntityCardSectionProps<T> {

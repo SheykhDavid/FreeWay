@@ -1,9 +1,9 @@
-import { Page, VStack } from '@marzneshin/common/components'
-import { CertificateWidget } from '@marzneshin/modules/settings'
-import { SubscriptionSettingsWidget } from '@marzneshin/modules/settings/subscription'
+import { Page, VStack } from '@freeway/common/components'
+import { CertificateWidget } from '@freeway/modules/settings'
+import { SubscriptionSettingsWidget } from '@freeway/modules/settings/subscription'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { SudoRoute } from '@marzneshin/libs/sudo-routes'
+import { SudoRoute } from '@freeway/libs/sudo-routes'
 
 export const Settings = () => {
   const { t } = useTranslation()

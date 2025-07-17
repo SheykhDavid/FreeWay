@@ -1,11 +1,11 @@
-import { HostType } from "@marzneshin/modules/hosts";
+import { HostType } from "@freeway/modules/hosts";
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@marzneshin/common/utils";
+import { fetch } from "@freeway/common/utils";
 import {
     FetchEntityReturn,
     UseEntityQueryProps,
     EntitySidebarQueryKeyType
-} from "@marzneshin/libs/entity-table/hooks";
+} from "@freeway/libs/entity-table/hooks";
 
 export async function fetchHosts({ queryKey }: EntitySidebarQueryKeyType): FetchEntityReturn<HostType> {
     const pagination = queryKey[3];

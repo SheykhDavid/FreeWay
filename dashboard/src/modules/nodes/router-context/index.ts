@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { NodeType } from "@marzneshin/modules/nodes";
+import { NodeType } from "@freeway/modules/nodes";
 
 interface RouterNodeContextProps {
     node: NodeType;

@@ -1,8 +1,8 @@
 import { type FC, useEffect, useState } from "react";
-import { Input } from "@marzneshin/common/components";
+import { Input } from "@freeway/common/components";
 import {
     useEntityTableContext
-} from "@marzneshin/libs/entity-table/contexts";
+} from "@freeway/libs/entity-table/contexts";
 import { useTranslation } from "react-i18next";
 import { useDebouncedCallback } from 'use-debounce';
 

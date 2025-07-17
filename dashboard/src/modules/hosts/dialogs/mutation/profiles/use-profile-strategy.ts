@@ -1,4 +1,4 @@
-import { ProtocolType } from "@marzneshin/modules/inbounds";
+import { ProtocolType } from "@freeway/modules/inbounds";
 import { generalProfile, profileByProtocol, ProfileConfig } from "./profiles";
 
 /**

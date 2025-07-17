@@ -4,7 +4,7 @@ import {
     FormLabel,
     Checkbox,
     FormControl,
-} from "@marzneshin/common/components";
+} from "@freeway/common/components";
 import { useFormContext } from "react-hook-form";
 
 export const CheckboxField = ({ name, label }: { name: string, label: string }) => {

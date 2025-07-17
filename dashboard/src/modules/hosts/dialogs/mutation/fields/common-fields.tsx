@@ -1,6 +1,6 @@
 import {
     HStack,
-} from "@marzneshin/common/components";
+} from "@freeway/common/components";
 import {
     RemarkField,
     AddressField,

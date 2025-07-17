@@ -1,5 +1,5 @@
-import { Page, Loading } from '@marzneshin/common/components'
-import { UsersNoServiceAlert, UsersTable } from '@marzneshin/modules/users'
+import { Page, Loading } from '@freeway/common/components'
+import { UsersNoServiceAlert, UsersTable } from '@freeway/modules/users'
 import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
 import { type FC, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -5,8 +5,8 @@ import {
 import {
     HostsDeleteConfirmationDialog,
     useRouterHostContext,
-} from "@marzneshin/modules/hosts";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@freeway/modules/hosts";
+import { useDialog } from "@freeway/common/hooks";
 
 const HostDelete = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useDialog(true);
