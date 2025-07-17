@@ -1,4 +1,4 @@
-"""Initiate Marzneshin database
+"""Initiate FreeWay database
 
 Revision ID: 20faa9f18c0a
 Revises:

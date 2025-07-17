@@ -1,6 +1,6 @@
-# Marzneshin CLI Commands Analysis
+# FreeWay CLI Commands Analysis
 
-This document lists all available CLI commands in the Marzneshin project organized by category.
+This document lists all available CLI commands in the FreeWay project organized by category.
 
 ## 1. Main Installation & Management Script (`script.sh`)
 
@@ -14,13 +14,13 @@ The main installation and management script provides the following commands:
 - **`logs`** - Show logs
 
 ### Installation & Updates
-- **`install`** - Install Marzneshin
+- **`install`** - Install FreeWay
 - **`update`** - Update to latest version
-- **`uninstall`** - Uninstall Marzneshin
-- **`install-script`** - Install Marzneshin script
+- **`uninstall`** - Uninstall FreeWay
+- **`install-script`** - Install FreeWay script
 
 ### CLI Access
-- **`cli`** - Access Marzneshin command-line interface
+- **`cli`** - Access FreeWay command-line interface
 
 ## 2. Python CLI Interface (`marzneshin-cli.py`)
 

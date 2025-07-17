@@ -119,9 +119,9 @@ install_docker() {
 }
 
 install_marzneshin_script() {
-    colorized_echo blue "Installing marzneshin script"
+    colorized_echo blue "Installing freeway script"
     curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/marzneshin
-    colorized_echo green "marzneshin script installed successfully"
+    colorized_echo green "freeway script installed successfully"
 }
 
 install_marzneshin() {
@@ -146,7 +146,7 @@ install_marzneshin() {
     curl -sL "$FILES_URL_PREFIX/.env.example" -o "$CONFIG_DIR/.env"
     colorized_echo green "File saved in $CONFIG_DIR/.env"
 
-    colorized_echo green "Marzneshin files downloaded successfully"
+    colorized_echo green "FreeWay files downloaded successfully"
 }
 
 install_marznode_xray_config() {
@@ -157,7 +157,7 @@ install_marznode_xray_config() {
 
 uninstall_marzneshin_script() {
     if [ -f "/usr/local/bin/marzneshin" ]; then
-        colorized_echo yellow "Removing marzneshin script"
+        colorized_echo yellow "Removing freeway script"
         rm "/usr/local/bin/marzneshin"
     fi
 }
@@ -173,7 +173,7 @@ uninstall_marzneshin_docker_images() {
     images=$(docker images | grep marzneshin | awk '{print $3}')
 
     if [ -n "$images" ]; then
-        colorized_echo yellow "Removing Docker images of Marzneshin"
+        colorized_echo yellow "Removing Docker images of FreeWay"
         for image in $images; do
             if docker rmi "$image" >/dev/null 2>&1; then
                 colorized_echo yellow "Image $image removed"
@@ -219,9 +219,9 @@ marzneshin_cli() {
 
 
 update_marzneshin_script() {
-    colorized_echo blue "Updating marzneshin script"
+    colorized_echo blue "Updating freeway script"
     curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/marzneshin
-    colorized_echo green "marzneshin script updated successfully"
+    colorized_echo green "freeway script updated successfully"
 }
 
 update_marzneshin() {
@@ -248,7 +248,7 @@ install_command() {
     check_running_as_root
     # Check if marzneshin is already installed
     if is_marzneshin_installed; then
-        colorized_echo red "Marzneshin is already installed at $CONFIG_DIR"
+        colorized_echo red "FreeWay is already installed at $CONFIG_DIR"
         read -p "Do you want to override the previous installation? (y/n) "
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
             colorized_echo red "Aborted installation"
@@ -302,11 +302,11 @@ uninstall_command() {
     check_running_as_root
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "Marzneshin's not installed!"
+        colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
 
-    read -p "Do you really want to uninstall Marzneshin? (y/n) "
+    read -p "Do you really want to uninstall FreeWay? (y/n) "
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         colorized_echo red "Aborted"
         exit 1
@@ -320,13 +320,13 @@ uninstall_command() {
     uninstall_marzneshin
     uninstall_marzneshin_docker_images
 
-    read -p "Do you want to remove marzneshin & marznode data files too ($NODE_DATA_DIR, $DATA_DIR)? (y/n) "
+    read -p "Do you want to remove freeway & marznode data files too ($NODE_DATA_DIR, $DATA_DIR)? (y/n) "
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        colorized_echo green "Marzneshin uninstalled successfully"
+        colorized_echo green "FreeWay uninstalled successfully"
     else
         uninstall_marzneshin_data_files
 	uninstall_marznode_data_files
-        colorized_echo green "Marzneshin uninstalled successfully"
+        colorized_echo green "FreeWay uninstalled successfully"
     fi
 }
 
@@ -360,14 +360,14 @@ up_command() {
 
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "Marzneshin is not installed!"
+        colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
     detect_compose
 
     if is_marzneshin_up; then
-        colorized_echo red "Marzneshin is already up"
+        colorized_echo red "FreeWay is already up"
         exit 1
     fi
 
@@ -381,14 +381,14 @@ down_command() {
 
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "Marzneshin's not installed!"
+        colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
 
     detect_compose
 
     if ! is_marzneshin_up; then
-        colorized_echo red "Marzneshin's already down"
+        colorized_echo red "FreeWay's already down"
         exit 1
     fi
 
@@ -425,7 +425,7 @@ restart_command() {
 
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "Marzneshin's not installed!"
+        colorized_echo red "FreeWay's not installed!"
         exit 1
     fi
 
@@ -476,7 +476,7 @@ status_command() {
 
 logs_command() {
     help() {
-        colorized_echo red "Usage: marzneshin logs [options]"
+        colorized_echo red "Usage: freeway logs [options]"
         echo ""
         echo "OPTIONS:"
         echo "  -h, --help        display this help message"
@@ -504,14 +504,14 @@ logs_command() {
 
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "Marzneshin is not installed!"
+        colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
     detect_compose
 
     if ! is_marzneshin_up; then
-        colorized_echo red "Marzneshin is not up."
+        colorized_echo red "FreeWay is not up."
         exit 1
     fi
 
@@ -525,14 +525,14 @@ logs_command() {
 cli_command() {
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "Marzneshin is not installed!"
+        colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
     detect_compose
 
     if ! is_marzneshin_up; then
-        colorized_echo red "Marzneshin is not up."
+        colorized_echo red "FreeWay is not up."
         exit 1
     fi
 
@@ -543,7 +543,7 @@ update_command() {
     check_running_as_root
     # Check if marzneshin is installed
     if ! is_marzneshin_installed; then
-        colorized_echo red "Marzneshin is not installed!"
+        colorized_echo red "FreeWay is not installed!"
         exit 1
     fi
 
@@ -553,11 +553,11 @@ update_command() {
     colorized_echo blue "Pulling latest version"
     update_marzneshin
 
-    colorized_echo blue "Restarting Marzneshin's services"
+    colorized_echo blue "Restarting FreeWay's services"
     down_marzneshin
     up_marzneshin
 
-    colorized_echo blue "Marzneshin updated successfully"
+    colorized_echo blue "FreeWay updated successfully"
 }
 
 
@@ -570,11 +570,11 @@ usage() {
     echo "  restart         Restart services"
     echo "  status          Show status"
     echo "  logs            Show logs"
-    echo "  cli             Marzneshin command-line interface"
-    echo "  install         Install Marzneshin"
+    echo "  cli             FreeWay command-line interface"
+    echo "  install         Install FreeWay"
     echo "  update          Update latest version"
-    echo "  uninstall       Uninstall Marzneshin"
-    echo "  install-script  Install Marzneshin script"
+    echo "  uninstall       Uninstall FreeWay"
+    echo "  install-script  Install FreeWay script"
     echo
 }
 
