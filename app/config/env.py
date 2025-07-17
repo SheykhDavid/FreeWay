@@ -23,6 +23,24 @@ UVICORN_UDS = config("UVICORN_UDS", default=None)
 UVICORN_SSL_CERTFILE = config("UVICORN_SSL_CERTFILE", default=None)
 UVICORN_SSL_KEYFILE = config("UVICORN_SSL_KEYFILE", default=None)
 
+# Multi-core processing configuration
+import os
+import multiprocessing
+
+def get_optimal_workers():
+    """Calculate optimal number of workers based on CPU cores"""
+    cpu_count = multiprocessing.cpu_count()
+    # For I/O bound applications: (2 x CPU cores) + 1
+    # For CPU bound applications: CPU cores
+    # Since this is a web API (mostly I/O bound), we use the I/O formula
+    return min((2 * cpu_count) + 1, 8)  # Cap at 8 workers to avoid excessive overhead
+
+UVICORN_WORKERS = config(
+    "UVICORN_WORKERS", 
+    cast=int, 
+    default=get_optimal_workers() if not DEBUG else 1
+)
+
 
 DEBUG = config("DEBUG", default=False, cast=bool)
 DOCS = config("DOCS", default=False, cast=bool)
