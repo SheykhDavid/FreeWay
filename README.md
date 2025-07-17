@@ -99,7 +99,7 @@ FreeWay controls the proxy nodes connected to it; monitoring/disabling/enabling 
 The easiest way to install FreeWay is using our installation script:
 
 ```bash
-sudo bash -c "$(curl -sL https://github.com/freeway-project/freeway/raw/master/script.sh)" @ install
+sudo bash -c "$(curl -sL https://github.com/SheykhDavid/FreeWay/raw/master/script.sh)" @ install
 ```
 
 This script will:
