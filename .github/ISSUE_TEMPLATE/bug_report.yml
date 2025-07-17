@@ -1,6 +1,6 @@
 ---
 name: 🐞Bug Report
-description: Create a report to help us improve Marzneshin by reproducing and fixing bugs
+description: Create a report to help us improve FreeWay by reproducing and fixing bugs
 title: "[BUG] "
 labels:
   - "bug"

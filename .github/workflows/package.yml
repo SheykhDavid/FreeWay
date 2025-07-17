@@ -104,9 +104,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: nightly
-          name: 'Marzneshin nightly release $$'
+          name: 'FreeWay nightly release $$'
           prerelease: true
           draft: false
           body: |
-            This is a nightly release of Marzneshin.
+            This is a nightly release of FreeWay.
             It's unstable compared to the official releases, **use it with caution**!
